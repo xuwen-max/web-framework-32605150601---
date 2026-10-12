@@ -2,7 +2,7 @@
     <div class="event-lab">
         <h3>🎯 事件实验室（2.4 事件对象 · 2.5 事件修饰符）</h3>
 
-        <!-- 获取方式一：不传参，方法首参自动是事件对象 -->
+  
         <button @click="showEvent">打印事件对象（不传参）</button>
         <!-- 获取方式二：传参时用 $event 占位 -->
         <button @click="showEventArg($event, 66)">showEventArg($event, 66)（传参版）</button>
