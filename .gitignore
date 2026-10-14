@@ -1,0 +1,29 @@
+# 依赖与构建产物
+# 章内每个实验项目各自还有一份 .gitignore；这里兜底，防止在 labs/ 这一层
+# 误把 node_modules 或构建产物提交进仓库。
+node_modules/
+dist/
+dist-ssr/
+
+# 日志
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 编辑器与系统文件
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 本地临时文件
+*.local
+*.tmp
