@@ -1,31 +1,43 @@
+<!-- ============================================================
+  App.vue —— ch05-routing 第 5 章实验台（路由版）
+  上一章的实验台是"锚点菜单"，这一章换成 router-link 导航：
+  导航栏 + 唯一出口 <router-view>，地址栏就是实验记录仪。
+  注意：router-link/router-view 没有 import、没注册——
+  它们是 app.use(router) 之后全局可用的"官方组件"。
+============================================================ -->
 <template>
   <div id="app">
-    <h1>ch06-ui-library｜第 6—7 章实验台</h1>
-    <p class="muted">第 06 课：UI 组件库（Element Plus · Vant）+ 网络请求与状态管理（Axios · Vuex · Pinia）</p>
-
+    <h1>ch05-routing｜第 5 章实验台</h1>
+    <p class="muted">第 05 课（5.1—5.6）：路由——地址栏变，组件换，页面不刷新</p>
     <nav class="top-nav">
-      <router-link to="/element">按钮与表格</router-link>
-      <router-link to="/form-menu">表单与菜单</router-link>
-      <router-link to="/vant">Vant 移动端</router-link>
-      <router-link to="/axios">Axios GET</router-link>
-      <router-link to="/books">图书列表 POST</router-link>
-      <router-link to="/vuex">Vuex 计数器</router-link>
-      <router-link to="/pinia">Pinia 计数器</router-link>
+      <!-- router-link = 会走路由的 <a>：to 写目标地址（别忘引号）；渲染后自动带高亮类 -->
+      <router-link to="/home">首页</router-link>
+      <router-link to="/about">关于</router-link>
+      <router-link to="/users">用户列表</router-link> <!-- 任务 3：动态路由 /users + /user/:id -->
+      <router-link to="/center">用户中心</router-link> <!-- 任务 4：嵌套路由 /center -->
+      <router-link to="/named">命名路由</router-link> <!-- 任务 5：name 跳转 /named -->
+      <router-link to="/program">编程式导航</router-link> <!-- 任务 6：router.push /program -->
+      <router-link to="/search">搜索</router-link> <!-- 任务 6：query 查询 /search -->
     </nav>
 
-    <p class="muted addr">当前地址：<code>{{ $route.fullPath }}</code></p>
+    <p class="muted addr">当前地址：<code>{{ $route.fullPath }}</code>｜登录态：<b>{{ $route.path === '/login' || isLogin() ?
+      '已登录' : '未登录' }}</b>（守卫看 token）</p>
 
-    <!-- 唯一的路由出口：地址匹配到谁，谁就在这里上屏 -->
     <router-view></router-view>
   </div>
 </template>
-
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+    // 用方法不用 computed：localStorage 不是响应式数据，computed 没有响应式依赖会被缓存成"旧值"；
+    // 方法每次渲染都重查——路由一变页面重渲染，登录态跟着刷新
+    isLogin() {
+      return !!localStorage.getItem('token')
+    }
+  }
 }
 </script>
-
 <style scoped>
 .top-nav {
   display: flex;
@@ -62,5 +74,10 @@ code {
   border-radius: 4px;
   padding: 0 6px;
   font-family: Consolas, Monaco, monospace;
+}
+
+.muted {
+  color: var(--muted);
+  margin-top: 0;
 }
 </style>
