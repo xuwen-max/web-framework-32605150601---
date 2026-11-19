@@ -27,3 +27,16 @@ Thumbs.db
 # 本地临时文件
 *.local
 *.tmp
+
+# 本地下载的安装包与试验目录
+# 这里的文件体积可达 GB 级；若不忽略，DSH 的「工作区改动」插件每轮快照
+# 都会把整份文件写进 C 盘临时目录（每轮约 1 GB 级），因此在仓库层面排除。
+_ollamatest/
+
+# 与课程作业无关的本地产物，不纳入仓库
+.workbuddy-ai/
+_memory-cleanup/
+_scripts/
+output/
+OpenViking-部署方案.md
+screenshots/pelican-cycling.svg
